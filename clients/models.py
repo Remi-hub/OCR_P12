@@ -1,10 +1,15 @@
 from django.db import models
-from contracts.models import Contract
+from django.utils import timezone
+
 from users.models import User
 
 
 # Create your models here.
 class Client(models.Model):
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
     """
     fields that contains informations about the client
     """
@@ -14,6 +19,11 @@ class Client(models.Model):
     phone = models.CharField(max_length=20)
     mobile = models.CharField(max_length=20)
     company_name = models.CharField(max_length=250)
-    date_created = models.DateTimeField
+    date_created = models.DateTimeField(auto_now_add=True) \
+        if models.DateTimeField(auto_now_add=True) is None\
+        else models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     sales_contact = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={"role": 'sales'})
+
+
+#todo regler laffichage status
