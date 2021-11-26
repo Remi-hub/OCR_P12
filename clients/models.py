@@ -1,7 +1,12 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+# from users.models import User
 
-from users.models import User
+CLIENT_STATUS = (
+    ("prospect", "prospect"),
+    ("acquired", "acquired")
+)
 
 
 # Create your models here.
@@ -23,7 +28,9 @@ class Client(models.Model):
         if models.DateTimeField(auto_now_add=True) is None\
         else models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    sales_contact = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={"role": 'sales'})
+    sales_contact = models.ForeignKey(User, on_delete=models.CASCADE)
+    # sales_contact = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={"role": 'sales'})
+    status = models.TextField(default="potential", choices=CLIENT_STATUS)
 
 
 #todo regler laffichage status
