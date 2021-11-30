@@ -40,10 +40,15 @@ INSTALLED_APPS = [
     'contracts',
     'clients',
     'events',
-    'users'
+    'users',
+
 ]
 
-# AUTH_USER_MODEL = 'myapp.MyUser'
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissions',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,5 +1,4 @@
 """OCR_P12 URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -13,9 +12,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+from users.views import UserViewSet
+from clients.views import ClientViewSet
+from events.views import EventViewSet
+from contracts.views import ContractViewSet
+
+
+router = routers.SimpleRouter()
+router.register(r'users', UserViewSet)
+router.register(r'clients', ClientViewSet)
+router.register(r'events', EventViewSet)
+router.register(r'contracts', ContractViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+
+] + router.urls
