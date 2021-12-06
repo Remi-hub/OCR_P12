@@ -21,15 +21,13 @@ from clients.views import ClientViewSet
 from events.views import EventViewSet
 from contracts.views import ContractViewSet
 
-
 router = routers.SimpleRouter()
 router.register(r'users', UserViewSet)
-router.register(r'clients', ClientViewSet)
-router.register(r'events', EventViewSet)
+router.register(r'clients', ClientViewSet, basename='Client')
+router.register(r'events', EventViewSet, basename='Event')
 router.register(r'contracts', ContractViewSet)
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
+                  path('admin/', admin.site.urls),
 
-] + router.urls
+              ] + router.urls

@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django.db.models import Q
 from django.contrib.auth.models import User, Group
 
+
 class ContractForm(ModelForm):
     class Meta:
         model = Contract

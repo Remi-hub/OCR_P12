@@ -33,5 +33,5 @@ class Client(models.Model):
 
 
 
-#todo filtrer les choix sales contact lors de la creation d'un client
 #todo cnstruire API django REST, avec endpoint sécurisé
+#todo en tant que support, voir uniquement les clients qui me sont attribué

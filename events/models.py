@@ -2,10 +2,8 @@ from django.db import models
 from django.utils import timezone
 
 from clients.models import Client
-# from users.models import User
 from contracts.models import Contract
 from django.contrib.auth.models import User
-id = 1
 
 EVENT_STATUS = (
     ("on_going", "On going"),
@@ -19,7 +17,7 @@ class Event(models.Model):
     def __str__(self):
         return f'{self.date_created} - Event for {self.client} '
 
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='events')
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(default=timezone.now)
     support_contact = models.ForeignKey(User, on_delete=models.CASCADE)
