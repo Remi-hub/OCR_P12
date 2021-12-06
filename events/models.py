@@ -20,10 +20,8 @@ class Event(models.Model):
         return f'{self.date_created} - Event for {self.client} '
 
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    date_created = models.DateField(auto_now_add=True) \
-        if models.DateField(auto_now_add=True) is None \
-        else models.DateField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(default=timezone.now)
+    date_updated = models.DateTimeField(default=timezone.now)
     support_contact = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.TextField(choices=EVENT_STATUS)
     attendees = models.IntegerField(default=0)
