@@ -20,6 +20,7 @@ from users.views import UserViewSet
 from clients.views import ClientViewSet
 from events.views import EventViewSet
 from contracts.views import ContractViewSet
+from django.urls import path
 
 router = routers.SimpleRouter()
 router.register(r'users', UserViewSet)
@@ -27,7 +28,13 @@ router.register(r'clients', ClientViewSet, basename='Client')
 router.register(r'events', EventViewSet, basename='Event')
 router.register(r'contracts', ContractViewSet)
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
 urlpatterns = [
                   path('admin/', admin.site.urls),
+                  path('sentry-debug/', trigger_error),
 
               ] + router.urls

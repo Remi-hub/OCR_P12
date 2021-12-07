@@ -20,7 +20,6 @@ class Event(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='events')
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(default=timezone.now)
-    # formatted_date = dateformat.format(timezone.now(), 'Y-m-d H:i:s')
     support_contact = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.TextField(choices=EVENT_STATUS)
     attendees = models.IntegerField(default=0)

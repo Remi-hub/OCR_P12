@@ -1,11 +1,11 @@
 from rest_framework import viewsets
-from OCR_P12.permissions import ActualDjangoModelPermissions
+from OCR_P12.permissions import PermissionEvent
 from events.models import Event
 from events.serializers import EventSerializer
 
 
 class EventViewSet(viewsets.ModelViewSet):
-    permission_classes = [ActualDjangoModelPermissions]
+    permission_classes = [PermissionEvent]
     serializer_class = EventSerializer
 
     def get_queryset(self):

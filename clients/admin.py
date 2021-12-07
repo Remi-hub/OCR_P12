@@ -7,13 +7,13 @@ class ClientAdmin(admin.ModelAdmin):
     form = ClientForm
 
     def get_queryset(self, request):
-        if 'Management' in request.user.groups.all().values_list("name", flat=True):
+        if request.user.groups.filter(name__iexact='management').exists():
             return Client.objects.all()
 
-        elif 'Sales' in request.user.groups.all().values_list("name", flat=True):
+        elif request.user.groups.filter(name__iexact='sales').exists():
             return Client.objects.all()
 
-        elif 'Support' in request.user.groups.all().values_list("name", flat=True):
+        elif request.user.groups.filter(name__iexact='support').exists():
             return Client.objects.filter(events__support_contact=request.user)
 
 

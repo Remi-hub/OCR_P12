@@ -7,14 +7,22 @@ class EventAdmin(admin.ModelAdmin):
     form = EventForm
 
     def get_queryset(self, request):
-        if 'Management' in request.user.groups.all().values_list("name", flat=True):
+        if request.user.groups.filter(name__iexact='management').exists():
             return Event.objects.all()
 
-        elif 'Sales' in request.user.groups.all().values_list("name", flat=True):
+        elif request.user.groups.filter(name__iexact='sales').exists():
             return Event.objects.all()
 
-        elif 'Support' in request.user.groups.all().values_list("name", flat=True):
+        elif request.user.groups.filter(name__iexact='support').exists():
             return Event.objects.filter(support_contact=request.user)
+
+    def has_change_permission(self, request, obj=None):
+
+        if obj is not None and obj.status == "finished":
+            if request.user.groups.filter(name__iexact='support').exists():
+                return False
+
+        return super().has_change_permission(request, obj)
 
 
 # Register your models here.
