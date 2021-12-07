@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from django.utils import timezone, dateformat
 
 from clients.models import Client
 from contracts.models import Contract
@@ -15,11 +15,12 @@ EVENT_STATUS = (
 class Event(models.Model):
 
     def __str__(self):
-        return f'{self.date_created} - Event for {self.client} '
+        return f'{self.date_created.strftime("%Y-%m-%d")} - Event for {self.client} '
 
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='events')
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(default=timezone.now)
+    # formatted_date = dateformat.format(timezone.now(), 'Y-m-d H:i:s')
     support_contact = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.TextField(choices=EVENT_STATUS)
     attendees = models.IntegerField(default=0)

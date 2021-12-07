@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 CLIENT_STATUS = (
     ("prospect", "prospect"),
     ("acquired", "acquired")
@@ -24,14 +23,8 @@ class Client(models.Model):
     mobile = models.CharField(max_length=20)
     company_name = models.CharField(max_length=250)
     date_created = models.DateTimeField(auto_now_add=True) \
-        if models.DateTimeField(auto_now_add=True) is None\
+        if models.DateTimeField(auto_now_add=True) is None \
         else models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     sales_contact = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.TextField(default="potential", choices=CLIENT_STATUS)
-
-
-
-
-#todo cnstruire API django REST, avec endpoint sécurisé
-#todo en tant que support, voir uniquement les clients qui me sont attribué

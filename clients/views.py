@@ -2,8 +2,6 @@ from rest_framework import viewsets
 from clients.serializers import ClientSerializer
 from clients.models import Client
 from OCR_P12.permissions import ActualDjangoModelPermissions
-from django.db.models import Q
-from django.contrib.auth.models import User
 
 
 # Create your views here.
