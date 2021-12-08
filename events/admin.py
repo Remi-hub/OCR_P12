@@ -22,7 +22,11 @@ class EventAdmin(admin.ModelAdmin):
             if request.user.groups.filter(name__iexact='support').exists():
                 return False
 
-        return super().has_change_permission(request, obj)
+        if obj is not None and obj.client.sales_contact != request.user:
+            return False
+        return True
+
+        # return super().has_change_permission(request, obj)
 
 
 # Register your models here.

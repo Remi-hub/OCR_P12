@@ -16,6 +16,11 @@ class ClientAdmin(admin.ModelAdmin):
         elif request.user.groups.filter(name__iexact='support').exists():
             return Client.objects.filter(events__support_contact=request.user)
 
+    def has_change_permission(self, request, obj=None):
+        if obj is not None and obj.sales_contact != request.user:
+            return False
+        return True
+
 
 # Register your models here.
 admin.site.register(Client, ClientAdmin)

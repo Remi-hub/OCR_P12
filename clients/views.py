@@ -1,12 +1,12 @@
 from rest_framework import viewsets
 from clients.serializers import ClientSerializer
 from clients.models import Client
-from OCR_P12.permissions import ActualDjangoModelPermissions
+from OCR_P12.permissions import ActualDjangoModelPermissions, PermissionClient
 
 
 # Create your views here.
 class ClientViewSet(viewsets.ModelViewSet):
-    permission_classes = [ActualDjangoModelPermissions]
+    permission_classes = [PermissionClient, ActualDjangoModelPermissions]
     serializer_class = ClientSerializer
 
     def get_queryset(self):
