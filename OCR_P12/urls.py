@@ -14,7 +14,6 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
 from rest_framework import routers
 from users.views import UserViewSet
 from clients.views import ClientViewSet
@@ -36,5 +35,4 @@ def trigger_error(request):
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('sentry-debug/', trigger_error),
-
               ] + router.urls

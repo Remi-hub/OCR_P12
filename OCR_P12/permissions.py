@@ -23,6 +23,9 @@ class PermissionEvent(BasePermission):
         if request.user.groups.filter(name__iexact="sales").exists() and obj.client.sales_contact != request.user:
             return False
 
+        if obj is not None and obj.support_contact != request.user:
+            return False
+
         return super().has_object_permission(request, view, obj)
 
 

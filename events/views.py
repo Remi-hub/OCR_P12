@@ -16,4 +16,4 @@ class EventViewSet(viewsets.ModelViewSet):
             return Event.objects.all()
 
         elif 'Support' in self.request.user.groups.all().values_list("name", flat=True):
-            return Event.objects.filter(support_contact=self.request.user)
+            return Event.objects.all()

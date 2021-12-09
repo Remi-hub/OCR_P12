@@ -14,19 +14,27 @@ class EventAdmin(admin.ModelAdmin):
             return Event.objects.all()
 
         elif request.user.groups.filter(name__iexact='support').exists():
-            return Event.objects.filter(support_contact=request.user)
+            return Event.objects.all()
 
     def has_change_permission(self, request, obj=None):
 
+        # can't modify event if user is from support and event is finished
         if obj is not None and obj.status == "finished":
             if request.user.groups.filter(name__iexact='support').exists():
+                print('je suis 1')
                 return False
 
-        if obj is not None and obj.client.sales_contact != request.user:
-            return False
-        return True
+        # can't modify event if user is from sales and is not the sales contact
+        elif request.user.groups.filter(name__iexact="sales").exists():
+            if obj is not None and obj.client.sales_contact != request.user:
+                print('je suis 2')
+                return False
+        # can't modify if user from support is not the support contact
+        elif request.user.groups.filter(name__iexact="support").exists():
+            if obj is not None and obj.support_contact != request.user:
+                return False
 
-        # return super().has_change_permission(request, obj)
+        return super().has_change_permission(request, obj)
 
 
 # Register your models here.
