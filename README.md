@@ -3,7 +3,7 @@
 #### Ce projet est un CRM permettant à la société Epic Events de gérer les données clients de manière sécurisée.
 
 ## Créer l'environnement virtuel
-Placez vous dans le dossier Softdesk (là où vous pouvez voir manage.py) et tapez :
+Placez vous dans le dossier racine (là où vous pouvez voir manage.py) et tapez :
 `python -m venv venv`  
 
 ## Activer l'environnement virtuel
