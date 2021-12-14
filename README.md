@@ -1,4 +1,3 @@
-# OCR_P12
 # OCR_P12_Epic_Events
 
 #### Ce projet est une API permettant la création de projet, ainsi que de problèmes et de commentaire relatif a celui-ci.
