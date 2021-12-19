@@ -21,13 +21,11 @@ class EventAdmin(admin.ModelAdmin):
         # can't modify event if user is from support and event is finished
         if obj is not None and obj.status == "finished":
             if request.user.groups.filter(name__iexact='support').exists():
-                print('je suis 1')
                 return False
 
         # can't modify event if user is from sales and is not the sales contact
         elif request.user.groups.filter(name__iexact="sales").exists():
             if obj is not None and obj.client.sales_contact != request.user:
-                print('je suis 2')
                 return False
         # can't modify if user from support is not the support contact
         elif request.user.groups.filter(name__iexact="support").exists():
